@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class = "jumbotron text-center">
+  <h1>Real Time Fleet and Track</h1>
+  <p> Tracking fleet of vehicles</p>
+</div>
+</head>
+
+<body>
+
+    
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="row">
+
+    <ul class="nav nav-justified">
+      <h3>
+        <div class="col-sm-4">
+          <%= link_to "Home", root_path, class: "nav-link active" %><span class="sr-only">current</span></div>
+        <div class="col-sm-4">
+          <li><a href="aboutus.html">About</a></li>
+          
+        
+      </h3>
+    </ul>
+
+
+      <div class></div>
+  </div>
+  </div>
+
+<p class="navbar-text pull-right">
+<% if user_signed_in? %>
+  Welcome user,<strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> |
+
+  
+  <h3>
+  <div class="col-sm-4">
+  <a href="add_vehicle.html">Add vehicle</a> </div> 
+  <a href="show_vehicles.html">Show vehicles</a> </div> </h3>
+  <a href="table.html">Show table</a> </div> </h3>
+
+  <%#= link_to "Show", fleet_track_path, :class => 'navbar-link'  %> 
+
+  
+  
+<% else %>
+  
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+
+<% end %>
+</p>
+
+
+</nav>
+<div class = "container">
+<p>
+  Real time fleet track is a web application.....etc etc..... </p>
+  </div>
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+<%= yield %>
+
+
+
+ 
+
+  <hr>
+  <footer class="container" >
+    <p >&copy;  Team 5, 2018</p>
+  </footer>
+</body>
+</html>

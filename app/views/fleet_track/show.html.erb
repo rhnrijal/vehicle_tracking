@@ -1,0 +1,19 @@
+<h3>Vehicles List</h3>
+
+
+<div>
+  <hr>
+  <br>
+  <% if user_signed_in? %>
+    <br>
+    <br> 
+    <%= "Name: " %> <%= @add_vehicle_info.first_name %> <%= @add_vehicle_info.last_name %>
+    <%= "License Number: " %> <%= @add_vehicle_info.license_num %>
+    <%= "Vehicle Number: " %> <%= @add_vehicle_info.vehicle_num %> 
+    <%= "Phone Number: " %> <%= @add_vehicle_info.phone_num %> 
+    <%= "Address: " %> <%= @add_vehicle_info.address %> 
+
+  <% end %>
+  <br>
+</div>
+

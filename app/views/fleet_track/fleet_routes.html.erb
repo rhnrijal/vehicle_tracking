@@ -1,0 +1,117 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.js"></script>
+
+    <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyDFE2vJ8Ppyp8oS8uzLzYnuXxzTrPKnPVQ",
+    authDomain: "transport-tracker-2312e.firebaseapp.com",
+    databaseURL: "https://transport-tracker-2312e.firebaseio.com",
+    projectId: "transport-tracker-2312e",
+    storageBucket: "transport-tracker-2312e.appspot.com",
+    messagingSenderId: "252338074444"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>Fleet Real Time Location</h3>
+    <table>
+        <tr><td>Time to Arrive</td><td id="time_to_arrive"></td></tr>
+        <tr><td>Distance</td><td id="distance"></td></tr>
+    </table>
+    <div id="map"></div>
+    <script>
+        function loadPosition(callback) {
+            var database = firebase.database();
+            database.ref('raw-locations/ba-7-cha-7890').once('value', function(snapshot){
+            if(snapshot.exists()){
+                var content = '';
+                var position = {};
+                var loaded  = false;
+                snapshot.forEach(function(data){
+                    var val = data.val();
+                    if(!loaded) {
+                        position['lat'] = val.lat;
+                        position['lng'] = val.lng;
+                        position['power'] = val.power;
+                        position['time'] = val.time;
+                        loaded = true;
+                    }
+                });
+            }
+            callback(position);
+        });
+    }
+
+
+      function initMap() {
+        loadPosition(function paintMap(origin) {
+            navigator.geolocation.getCurrentPosition(function dest(destination_pos) {
+                destination = {
+                    'lat' : destination_pos.coords.latitude,
+                    'lng' : destination_pos.coords.longitude,
+                };
+
+                var marker = new google.maps.Marker({
+                    position: destination,
+                    map: map
+                });
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+                var service = new google.maps.DistanceMatrixService;
+
+                service.getDistanceMatrix({
+                    origins: [origin],
+                    destinations: [destination],
+                    travelMode: 'DRIVING',
+                }, function (response, status) {
+                    var dist = $('#distance');
+                    var time = $('#time_to_arrive');
+                    dist.html(response.rows[0].elements[0].distance.text);
+                    time.html(response.rows[0].elements[0].duration.text);
+                });
+            });
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: origin
+            });
+            var marker = new google.maps.Marker({
+                position: origin,
+                map: map
+            });
+
+
+        });
+    }
+    /*
+            
+    function initMap() {
+        var uluru = {lat: 20, lng: 90}; //lat and long of AIT
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+      */
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlMMqsL-kfHTDrEijidsSFTY08P--4Xzk&callback=initMap">
+    </script>
+  </body>
+</html>

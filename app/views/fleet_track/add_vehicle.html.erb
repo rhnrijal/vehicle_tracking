@@ -1,0 +1,43 @@
+<h3>Add new vehicle details</h3>
+
+
+
+  <%= form_for @add_vehicle_info , url: {action: "create"} do |f| %>
+  
+  <div class="field">
+    <%= f.label :first_name , "First Name" %><br />
+    <%= f.text_field :first_name, autocomplete: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, "Last Name" %><br />
+    <%= f.text_field :last_name, autocomplete: "on" %>
+  </div>
+
+  
+  <div class="field">
+    <%= f.label :license_num, "License Plate Number" %><br />
+    <%= f.text_field :license_num, autocomplete: "on" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vehicle_num, "Vehicle Number " %><br />
+    <%= f.text_field :vehicle_num, autocomplete: "on" %>
+  </div>
+
+	<div class="field">
+    <%= f.label :phone_num, "Phone Number " %><br />
+    <%= f.text_field :phone_num, autocomplete: "on" %>
+  	</div>
+
+
+      
+  <div class="field">
+    <%= f.label :address, "Address" %><br />
+    <%= f.text_field :address, autocomplete: "on" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+<% end %>

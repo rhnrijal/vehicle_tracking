@@ -1,0 +1,77 @@
+<h2> Table
+</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firebase data</title>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDFE2vJ8Ppyp8oS8uzLzYnuXxzTrPKnPVQ",
+    authDomain: "transport-tracker-2312e.firebaseapp.com",
+    databaseURL: "https://transport-tracker-2312e.firebaseio.com",
+    projectId: "transport-tracker-2312e",
+    storageBucket: "transport-tracker-2312e.appspot.com",
+    messagingSenderId: "252338074444"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<body>
+      <h1></h1>
+      <p>Real Time data results for vehicle Ba-7cha-7890</p>
+      <table class="table table-striped" id="table1">
+        <thead>
+          <tr>
+        <th>Latitute</th>
+            <th>Longitude</th>
+            <th>Battery Power( % age )</th>
+            <th>Time</th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+      
+      </table>
+</div>
+
+
+<br>
+
+
+
+
+</body>
+
+
+<script>
+    var database = firebase.database();
+    database.ref('raw-locations/ba-7-cha-7890').once('value', function(snapshot){
+        if(snapshot.exists()){
+            var content = '';
+            snapshot.forEach(function(data){
+                var val = data.val();
+                content +='<tr>';
+                content += '<td>' + val.lat + '</td>';
+                content += '<td>' + val.lng + '</td>';
+                content += '<td>' + val.power + '</td>';
+                content += '<td>' + val.time + '</td>';
+
+            });
+            $('#table1').append(content);
+        }
+    });
+</script>
+<%= link_to "Check Route", fleet_routes_path, class: "nav-link active" %>
+<br>
+
+
+
+</head>
+
+</html>
