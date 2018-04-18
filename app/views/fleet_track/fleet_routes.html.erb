@@ -19,18 +19,22 @@
     </script>
     <style>
        #map {
+        
+        
         height: 400px;
         width: 100%;
        }
     </style>
   </head>
   <body>
-    <h3>Fleet Real Time Location</h3>
+    <br>
+    <h3>Fleet Real Time Location on the map</h3>
     <table>
-        <tr><td>Time to Arrive</td><td id="time_to_arrive"></td></tr>
-        <tr><td>Distance</td><td id="distance"></td></tr>
+        <tr><td>Time to Arrive  ----> </td><td id="time_to_arrive"></td></tr>
+        <tr><td>Distance remaining  ----> </td><td id="distance"></td></tr>
     </table>
     <div id="map"></div>
+<br><br>
     <script>
         function loadPosition(callback) {
             var database = firebase.database();
@@ -111,6 +115,7 @@
       */
     </script>
     <script async defer
+    
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlMMqsL-kfHTDrEijidsSFTY08P--4Xzk&callback=initMap">
     </script>
   </body>
