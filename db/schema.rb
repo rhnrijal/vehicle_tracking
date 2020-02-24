@@ -16,14 +16,14 @@ ActiveRecord::Schema.define(version: 20180404024505) do
   enable_extension "plpgsql"
 
   create_table "fleets", force: :cascade do |t|
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "License_num", default: "", null: false
+    t.string "vehicle_num", default: "", null: false
+    t.string "phone_num", default: "", null: false
+    t.string "address", default: "N/A"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "license_num", null: false
-    t.string "vehicle_num", null: false
-    t.decimal "phone_num", null: false
-    t.string "address", null: false
   end
 
   create_table "users", force: :cascade do |t|
